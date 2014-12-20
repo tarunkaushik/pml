@@ -16,7 +16,26 @@ Data and libraries were loaded into R
 
 ```r
 library(caret)
+```
+
+```
+## Warning: package 'caret' was built under R version 3.1.2
+```
+
+```
+## Loading required package: lattice
+## Loading required package: ggplot2
+```
+
+```r
 library(xtable)
+```
+
+```
+## Warning: package 'xtable' was built under R version 3.1.2
+```
+
+```r
 library(ggplot2)
 trainData <- read.csv("pml-training.csv")
 validation <- read.csv("pml-testing.csv")
@@ -184,10 +203,42 @@ In the end we would use this final model to predict classe of our validation dat
 
 ```r
 modelFit1 <- train(classe~.,data=training1, method="rf")
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "train"
+```
+
+```r
 modelFit2 <- train(classe~.,data=training2, method="rf")
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "train"
+```
+
+```r
 modelFit3 <- train(classe~.,data=training3, method="rf")
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "train"
+```
+
+```r
 modelFit4 <- train(classe~.,data=training4, method="rf")
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "train"
+```
+
+```r
 modelFit5 <- train(classe~.,data=training5, method="rf")
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "train"
 ```
 After fitting, each model was validated on corresponding testing dataset.
 Overall summary of Confusion Matrix of each model helped in determining the best performing model out of the 5 models.
@@ -195,125 +246,127 @@ Overall summary of Confusion Matrix of each model helped in determining the best
 
 ```r
 testing1$pred=predict(modelFit1, testing1)
+```
+
+```
+## Error in predict(modelFit1, testing1): object 'modelFit1' not found
+```
+
+```r
 testing2$pred=predict(modelFit2, testing2)
+```
+
+```
+## Error in predict(modelFit2, testing2): object 'modelFit2' not found
+```
+
+```r
 testing3$pred=predict(modelFit3, testing3)
+```
+
+```
+## Error in predict(modelFit3, testing3): object 'modelFit3' not found
+```
+
+```r
 testing4$pred=predict(modelFit4, testing4)
+```
+
+```
+## Error in predict(modelFit4, testing4): object 'modelFit4' not found
+```
+
+```r
 testing5$pred=predict(modelFit5, testing5)
+```
 
+```
+## Error in predict(modelFit5, testing5): object 'modelFit5' not found
+```
+
+```r
 testing1Results <- confusionMatrix(testing1$pred,testing1$classe)$overall
+```
+
+```
+## Error in confusionMatrix.default(testing1$pred, testing1$classe): the data and reference factors must have the same number of levels
+```
+
+```r
 testing2Results <- confusionMatrix(testing2$pred,testing2$classe)$overall
+```
+
+```
+## Error in confusionMatrix.default(testing2$pred, testing2$classe): the data and reference factors must have the same number of levels
+```
+
+```r
 testing3Results <- confusionMatrix(testing3$pred,testing3$classe)$overall
+```
+
+```
+## Error in confusionMatrix.default(testing3$pred, testing3$classe): the data and reference factors must have the same number of levels
+```
+
+```r
 testing4Results <- confusionMatrix(testing4$pred,testing4$classe)$overall
+```
+
+```
+## Error in confusionMatrix.default(testing4$pred, testing4$classe): the data and reference factors must have the same number of levels
+```
+
+```r
 testing5Results <- confusionMatrix(testing5$pred,testing5$classe)$overall
+```
 
+```
+## Error in confusionMatrix.default(testing5$pred, testing5$classe): the data and reference factors must have the same number of levels
+```
+
+```r
 testingResults <- rbind(testing1Results,testing2Results,testing3Results,testing4Results,testing5Results)
+```
+
+```
+## Error in rbind(testing1Results, testing2Results, testing3Results, testing4Results, : object 'testing1Results' not found
+```
+
+```r
 testingResults <- data.frame(testingResults)
+```
 
+```
+## Error in data.frame(testingResults): object 'testingResults' not found
+```
+
+```r
 modelFit1Accuracy <- round(testingResults$Accuracy[1]*100,2)
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'testingResults' not found
+```
+
+```r
 testingResults <- xtable(data.frame(testingResults))
+```
+
+```
+## Error in data.frame(testingResults): object 'testingResults' not found
+```
+
+```r
 print(testingResults,type="html")
 ```
 
-<!-- html table generated in R 3.1.0 by xtable 1.7-4 package -->
-<!-- Fri Dec 19 15:44:41 2014 -->
-<table border=1>
-<tr> <th>  </th> <th> Accuracy </th> <th> Kappa </th> <th> AccuracyLower </th> <th> AccuracyUpper </th> <th> AccuracyNull </th> <th> AccuracyPValue </th> <th> McnemarPValue </th>  </tr>
-  <tr> <td align="right"> testing1Results </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 1.00 </td> <td align="right"> 0.28 </td> <td align="right"> 0.00 </td> <td align="right">  </td> </tr>
-  <tr> <td align="right"> testing2Results </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 1.00 </td> <td align="right"> 0.28 </td> <td align="right"> 0.00 </td> <td align="right">  </td> </tr>
-  <tr> <td align="right"> testing3Results </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 1.00 </td> <td align="right"> 0.28 </td> <td align="right"> 0.00 </td> <td align="right">  </td> </tr>
-  <tr> <td align="right"> testing4Results </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.28 </td> <td align="right"> 0.00 </td> <td align="right">  </td> </tr>
-  <tr> <td align="right"> testing5Results </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 0.99 </td> <td align="right"> 1.00 </td> <td align="right"> 0.28 </td> <td align="right"> 0.00 </td> <td align="right">  </td> </tr>
-   </table>
-
-As we can see that **modelFit1** has best accuracy of **99.41 %**. Although there is not huge difference between the accuracy of different models, we would still go forward with the best among the 5 models and store it in the variable modelFitFinal.
-modelFitFinal is then validated on initial testing dataset, which we haven't used yet in any predictions.
-Overall summary of Confusion Matrix of final model on testing dataset gives us the estimate of out of sample error rates, which is **1-accuracy.**
-
-
-```r
-modelFitFinal <- modelFit1
-testing$pred=predict(modelFitFinal, testing)
-maintestingResults <- confusionMatrix(testing$pred,testing$classe)$overall
-errorRate <- round((1 - maintestingResults[1])*100,2)
-maintestingResults <- xtable(data.frame(maintestingResults))
-Predictiontable <- xtable(table(testing$pred,testing$classe))
-print(maintestingResults,type="html")
+```
+## Error in print(testingResults, type = "html"): object 'testingResults' not found
 ```
 
-<!-- html table generated in R 3.1.0 by xtable 1.7-4 package -->
-<!-- Fri Dec 19 15:44:42 2014 -->
-<table border=1>
-<tr> <th>  </th> <th> maintestingResults </th>  </tr>
-  <tr> <td align="right"> Accuracy </td> <td align="right"> 0.99 </td> </tr>
-  <tr> <td align="right"> Kappa </td> <td align="right"> 0.99 </td> </tr>
-  <tr> <td align="right"> AccuracyLower </td> <td align="right"> 0.99 </td> </tr>
-  <tr> <td align="right"> AccuracyUpper </td> <td align="right"> 1.00 </td> </tr>
-  <tr> <td align="right"> AccuracyNull </td> <td align="right"> 0.28 </td> </tr>
-  <tr> <td align="right"> AccuracyPValue </td> <td align="right"> 0.00 </td> </tr>
-  <tr> <td align="right"> McnemarPValue </td> <td align="right">  </td> </tr>
-   </table>
-
-```r
-print(Predictiontable,type="html")
-```
-
-<!-- html table generated in R 3.1.0 by xtable 1.7-4 package -->
-<!-- Fri Dec 19 15:44:42 2014 -->
-<table border=1>
-<tr> <th>  </th> <th> A </th> <th> B </th> <th> C </th> <th> D </th> <th> E </th>  </tr>
-  <tr> <td align="right"> A </td> <td align="right"> 2231 </td> <td align="right">   6 </td> <td align="right">   0 </td> <td align="right">   0 </td> <td align="right">   0 </td> </tr>
-  <tr> <td align="right"> B </td> <td align="right">   0 </td> <td align="right"> 1506 </td> <td align="right">  15 </td> <td align="right">   0 </td> <td align="right">   1 </td> </tr>
-  <tr> <td align="right"> C </td> <td align="right">   0 </td> <td align="right">   6 </td> <td align="right"> 1350 </td> <td align="right">  12 </td> <td align="right">   0 </td> </tr>
-  <tr> <td align="right"> D </td> <td align="right">   0 </td> <td align="right">   0 </td> <td align="right">   3 </td> <td align="right"> 1274 </td> <td align="right">   7 </td> </tr>
-  <tr> <td align="right"> E </td> <td align="right">   1 </td> <td align="right">   0 </td> <td align="right">   0 </td> <td align="right">   0 </td> <td align="right"> 1434 </td> </tr>
-   </table>
-## Out of sample error rate estimation
-Out of sample error rate of the final model is **0.65 %.**
-Following is the plot of classe v/s prediction on testing dataset.
 
 
-```r
-plot(testing$pred,testing$classe, xlab="predictions",ylab="actual", col=c("red","blue","green","gray","yellow"))
-```
-
-![plot of chunk TestPlot](figure/TestPlot-1.png) 
-
-# Prediction
-
-Finally we predict the activity of the validation dataset.
 
 
-```r
-validation$pred=predict(modelFitFinal, validation)
-valitarionResult <- xtable(validation[,56:57])
-print(valitarionResult,type="html")
-```
 
-<!-- html table generated in R 3.1.0 by xtable 1.7-4 package -->
-<!-- Fri Dec 19 15:44:42 2014 -->
-<table border=1>
-<tr> <th>  </th> <th> problem_id </th> <th> pred </th>  </tr>
-  <tr> <td align="right"> 1 </td> <td align="right">   1 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 2 </td> <td align="right">   2 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 3 </td> <td align="right">   3 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 4 </td> <td align="right">   4 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 5 </td> <td align="right">   5 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 6 </td> <td align="right">   6 </td> <td> E </td> </tr>
-  <tr> <td align="right"> 7 </td> <td align="right">   7 </td> <td> D </td> </tr>
-  <tr> <td align="right"> 8 </td> <td align="right">   8 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 9 </td> <td align="right">   9 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 10 </td> <td align="right">  10 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 11 </td> <td align="right">  11 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 12 </td> <td align="right">  12 </td> <td> C </td> </tr>
-  <tr> <td align="right"> 13 </td> <td align="right">  13 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 14 </td> <td align="right">  14 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 15 </td> <td align="right">  15 </td> <td> E </td> </tr>
-  <tr> <td align="right"> 16 </td> <td align="right">  16 </td> <td> E </td> </tr>
-  <tr> <td align="right"> 17 </td> <td align="right">  17 </td> <td> A </td> </tr>
-  <tr> <td align="right"> 18 </td> <td align="right">  18 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 19 </td> <td align="right">  19 </td> <td> B </td> </tr>
-  <tr> <td align="right"> 20 </td> <td align="right">  20 </td> <td> B </td> </tr>
-   </table>
 
-Words including the code, graphs, tables and this last line = 1261.

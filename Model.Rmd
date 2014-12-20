@@ -13,7 +13,7 @@ One more dataset, testing was also provided, for which we have to predict the cl
 
 Data and libraries were loaded into R
 
-```{r LoadingData,echo=TRUE}
+```{r LoadingData,echo=TRUE, results="hide"}
 library(caret)
 library(xtable)
 library(ggplot2)
@@ -163,7 +163,7 @@ We can see that there is slight difference among distributon of feature values a
 Each time a random forest model was fit on training dataset and accuracy was determined on paired testing dataset.
 The model with best accuracy would be used as the FinalModel.
 We would validate the final model on our initial testing dataset to get an idea of the out of sample error-rate. we would do this only once, at the end.
-In the end we would use this final model to predict classe of our validation dataset.
+In the end we would use this final model to predict classe of our validation dataset.  
 
 ```{r ModelFitOnTraining,echo=TRUE, cache=TRUE}
 modelFit1 <- train(classe~.,data=training1, method="rf")
